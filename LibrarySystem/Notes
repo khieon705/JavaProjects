@@ -1,0 +1,28 @@
+CLASSES:
+Library Class - for library functions
+
+
+LibraryCatalog Class - for collection of books in the library
+
+
+Patron Class - for borrower's information
+
+
+PatronRegistry Class - for collection of patrons
+
+
+Book Class - for book information
+Instance Variable
+- title
+- author
+Methods
++ Book(String title, String name):
++ getTitle(): String
++ getAuthor(): String
++ toString(): String
+
+
+LoanService Class - for rules and fee calculation
+Loan Class - for loan information
+UI Class - for program interface
+Main Class
