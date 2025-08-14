@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public record Book(String title, String author) {
     public Book(String title, String author) {
         this.title = StringFormat.formatStoredString(title);
