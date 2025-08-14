@@ -20,7 +20,13 @@ Methods
 + getTitle(): String
 + getAuthor(): String
 + toString(): String
++ hashCode(): int
++ equals(Object o): boolean
 
+
+StringFormat Class - for formatting methods
++ formatStoredString(String string): String
++ formatOutputString(String string): String
 
 LoanService Class - for rules and fee calculation
 Loan Class - for loan information
