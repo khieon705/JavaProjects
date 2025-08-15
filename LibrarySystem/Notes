@@ -1,34 +1,61 @@
 CLASSES:
-Library Class - for library functions
+Library Class - for library functions (NOT YET STARTED)
+- bookCollection
+- patronRegistry
++ addBook(Book book): void
++ borrowBook(Book book, String patron)
 
-
-LibraryCatalog Class - for collection of books in the library
-
-
-Patron Class - for borrower's information
-
+Patron Class - for borrower's information (UNFINISHED)
+Instance Variable
+- name
+- record
+Method
++ Patron(String name):
++ addLoan(Loan loan)
 
 PatronRegistry Class - for collection of patrons
+- patronList
++ getPatron(String name): Patron
 
-
-Book Class - for book information
+Book Record - for book information (FINISHED)
 Instance Variable
 - title
 - author
 Methods
 + Book(String title, String name):
-+ getTitle(): String
-+ getAuthor(): String
 + toString(): String
-+ hashCode(): int
-+ equals(Object o): boolean
 
 
-StringFormat Class - for formatting methods
+StringFormat Class - for formatting methods (FINISHED)
 + formatStoredString(String string): String
 + formatOutputString(String string): String
 
 LoanService Class - for rules and fee calculation
-Loan Class - for loan information
+
+
+
+Loan Class - for loan information (FINISHED)
+Instance Variable
+- patron
+- book
+- dueDate
+- returnDate
+- borrowDate
+- returned
+Methods
++ Loan(Patron patron, Book book, LocalDate dueDate, LocalDate loanDate)
++ setReturnDate(LocalDate returnDate): void
++ isOverDue(): boolean
++ daysDifference(): long
++ returned(): void
++ toString(): String
+
 UI Class - for program interface
-Main Class
+- scanner
+- library
++ start(): void
++ addBook(): void
++ addPatron(): void
++ borrowBook(): void
++ returnBook(): void
++ viewPatronInformation(): void

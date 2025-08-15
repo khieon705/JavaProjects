@@ -17,6 +17,14 @@ public class Loan {
         returned = false;
     }
 
+    public Patron getPatron() {
+        return patron;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
     public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
@@ -26,7 +34,7 @@ public class Loan {
     }
 
     public boolean isOverDue() {
-        return returnDate.isBefore(dueDate);
+        return dueDate.isBefore(returnDate);
     }
 
     public long daysDifference() {
