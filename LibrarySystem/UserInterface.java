@@ -18,6 +18,7 @@ public class UserInterface {
             System.out.println("[4] Return Book");
             System.out.println("[5] View Patron Information");
             System.out.println("[6] Exit Program");
+            System.out.print("Enter Command: ");
             int command = Integer.parseInt(scanner.nextLine());
 
             switch (command) {
@@ -25,6 +26,11 @@ public class UserInterface {
                 case 2 -> addPatron();
                 case 3 -> borrowBook();
                 case 4 -> returnBook();
+                case 6 -> {
+                    System.out.println("Exiting Program...");
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid Input. Try again");
             }
 
         }
