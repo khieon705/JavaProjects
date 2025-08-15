@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Library {
@@ -44,7 +43,9 @@ public class Library {
         }
 
         reduceCopy(book);
-        loanRecord.addLoan(new Loan(patron, book, LocalDate.now().plusDays(7), LocalDate.now()));
+        Loan loan = new Loan(patron, book, LocalDate.now().plusDays(7), LocalDate.now());
+        loanRecord.addLoan(loan);
+        patron.addLoan(loan);
     }
 
     public void returnBook(Book book, String name) {
@@ -57,6 +58,7 @@ public class Library {
         Loan loan = loanRecord.getLoan(patron, book);
         loanRecord.updateLoanStatus(LocalDate.now(), loan);
         loanRecord.viewLoan(loan);
+        increaseCopy(book);
     }
 
     private void reduceCopy(Book book) {
