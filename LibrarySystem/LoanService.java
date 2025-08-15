@@ -1,9 +1,7 @@
-import javax.security.auth.callback.LanguageCallback;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class LoanService {
-    private final int loanFee = 10;
     private final ArrayList<Loan> loanRecord;
 
     public LoanService() {
@@ -22,10 +20,6 @@ public class LoanService {
 
     public void addLoan(Loan loan) {
         loanRecord.add(loan);
-    }
-
-    public void loanRules() {
-
     }
 
     public void viewLoan(Loan loan) {
@@ -56,9 +50,14 @@ public class LoanService {
 
     public long loanFee(Loan loan) {
         if (loan.isOverDue()) {
+            int loanFee = 10;
             return loan.daysDifference() * loanFee;
         }
 
         return 0;
+    }
+
+    public ArrayList<Loan> getLoanRecord() {
+        return loanRecord;
     }
 }

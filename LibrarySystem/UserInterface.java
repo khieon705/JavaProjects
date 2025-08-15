@@ -20,12 +20,14 @@ public class UserInterface {
             System.out.println("[6] Exit Program");
             System.out.print("Enter Command: ");
             int command = Integer.parseInt(scanner.nextLine());
+            System.out.println();
 
             switch (command) {
                 case 1 -> addBook();
                 case 2 -> addPatron();
                 case 3 -> borrowBook();
                 case 4 -> returnBook();
+                case 5 -> viewLoanInformation();
                 case 6 -> {
                     System.out.println("Exiting Program...");
                     System.exit(0);
@@ -33,6 +35,7 @@ public class UserInterface {
                 default -> System.out.println("Invalid Input. Try again");
             }
 
+            System.out.println();
         }
     }
 
@@ -72,11 +75,20 @@ public class UserInterface {
         String title = scanner.nextLine();
         System.out.print("Enter book author: ");
         String author = scanner.nextLine();
-
+        System.out.println();
         library.returnBook(new Book(title, author), name);
     }
 
-    private void viewPatronInformation() {
+    private void viewLoanInformation() {
+        System.out.print("View all? (Y/n) ");
+        String input = scanner.nextLine();
 
+        if (StringFormat.formatStoredString(input).equals("y")) {
+            library.viewLoanHistory();
+        } else if (StringFormat.formatStoredString(input).equals("n")) {
+            System.out.print("Enter patron name: ");
+            String name = scanner.nextLine();
+            library.viewLoanHistory(name);
+        }
     }
 }

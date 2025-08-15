@@ -19,7 +19,7 @@ public class Patron {
     }
 
     public String getName() {
-        return StringFormat.formatOutputString(name);
+        return name;
     }
 
     @Override

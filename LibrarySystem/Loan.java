@@ -45,7 +45,7 @@ public class Loan {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Patron: ").append(patron.getName()).append("\n");
+        sb.append("Patron: ").append(StringFormat.formatOutputString(patron.getName())).append("\n");
         sb.append(book).append("\n");
         sb.append("Loan Date: ").append(loanDate).append("\n");
         sb.append("Due Date: ").append(dueDate).append("\n");

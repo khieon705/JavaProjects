@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Library {
@@ -56,9 +57,27 @@ public class Library {
 
         Patron patron = patronRegistry.getPatron(name);
         Loan loan = loanRecord.getLoan(patron, book);
+
+        if (loan == null) {
+            return;
+        }
+
         loanRecord.updateLoanStatus(LocalDate.now(), loan);
         loanRecord.viewLoan(loan);
         increaseCopy(book);
+    }
+
+    public void viewLoanHistory(String name) {
+        patronRegistry.viewPatronHistory(name);
+    }
+
+    public void viewLoanHistory() {
+        ArrayList<Loan> record = loanRecord.getLoanRecord();
+
+        System.out.println("=== Loan History ===");
+        for (Loan loan : record) {
+            System.out.println(loan);
+        }
     }
 
     private void reduceCopy(Book book) {
