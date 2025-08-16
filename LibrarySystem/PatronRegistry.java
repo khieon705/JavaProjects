@@ -22,7 +22,7 @@ public class PatronRegistry {
     }
 
     public Patron getPatron(String name) {
-        return patronList.get(StringFormat.formatStoredString(name));
+        return patronList.get(name);
     }
 
     public void viewPatronHistory(String name) {
