@@ -8,13 +8,13 @@ public class PatronRegistry {
         patronList = new HashMap<>();
     }
 
-    public void addPatron(Patron patron) {
+    public boolean addPatron(Patron patron) {
         if (isDuplicate(patron)) {
-            System.out.println("Name is already registered");
-            return;
+            return false;
         }
 
         patronList.put(patron.getName(), patron);
+        return true;
     }
 
     private boolean isDuplicate(Patron patron) {
