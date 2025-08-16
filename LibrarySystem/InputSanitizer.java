@@ -1,4 +1,4 @@
-public class StringFormat {
+public class InputSanitizer {
     public static String formatOutputString(String string) {
         if (string.isEmpty()) {
             return string;
