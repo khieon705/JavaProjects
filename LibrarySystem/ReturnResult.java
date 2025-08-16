@@ -1,0 +1,7 @@
+public enum ReturnResult {
+    SUCCESS_ON_TIME,
+    SUCCESS_LATE,
+    NOT_LIBRARY_BOOK,
+    PATRON_NOT_REGISTERED,
+    LOAN_NOT_FOUND
+}
