@@ -24,4 +24,8 @@ public class PatronRegistry {
     public Patron getPatron(String name) {
         return patronList.get(name);
     }
+
+    public Map<String, Patron> getPatronList() {
+        return patronList;
+    }
 }
