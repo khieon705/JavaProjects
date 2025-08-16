@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Collections;
 
 public class Patron {
     private final String name;
@@ -14,8 +16,8 @@ public class Patron {
         record.add(loan);
     }
 
-    public ArrayList<Loan> getRecord() {
-        return record;
+    public List<Loan> getRecord() {
+        return Collections.unmodifiableList(record);
     }
 
     public String getName() {
