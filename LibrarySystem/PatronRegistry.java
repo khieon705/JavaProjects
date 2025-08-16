@@ -1,5 +1,5 @@
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PatronRegistry {
     private final HashMap<String, Patron> patronList;
@@ -9,7 +9,7 @@ public class PatronRegistry {
     }
 
     public void addPatron(Patron patron) {
-        if (isDuplicate(patron.getName())) {
+        if (isDuplicate(patron)) {
             System.out.println("Name is already registered");
             return;
         }
@@ -17,32 +17,11 @@ public class PatronRegistry {
         patronList.put(patron.getName(), patron);
     }
 
-    private boolean isDuplicate(String name) {
-        return patronList.containsKey(name);
+    private boolean isDuplicate(Patron patron) {
+        return patronList.containsValue(patron);
     }
 
     public Patron getPatron(String name) {
         return patronList.get(name);
-    }
-
-    public void viewPatronHistory(String name) {
-        Patron patron = getPatron(name);
-
-        if (patron == null) {
-            System.out.println("Name entered is not registered");
-            return;
-        }
-
-        ArrayList<Loan> record = patron.getRecord();
-
-        if (record == null) {
-            return;
-        }
-
-        System.out.println("=== Loan History ===");
-        for (Loan loan : record) {
-            System.out.println(loan);
-            System.out.println();
-        }
     }
 }
