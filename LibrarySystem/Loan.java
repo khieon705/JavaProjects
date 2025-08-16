@@ -29,12 +29,16 @@ public class Loan {
         this.returnDate = returnDate;
     }
 
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+
     public void returned() {
         returned = true;
     }
 
-    public boolean isOverDue() {
-        return dueDate.isBefore(returnDate);
+    public boolean isOverDue(LocalDate date) {
+        return date.isAfter(dueDate);
     }
 
     public long daysDifference() {
@@ -43,15 +47,6 @@ public class Loan {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Patron: ").append(StringFormat.formatOutputString(patron.getName())).append("\n");
-        sb.append(book).append("\n");
-        sb.append("Loan Date: ").append(loanDate).append("\n");
-        sb.append("Due Date: ").append(dueDate).append("\n");
-        sb.append("Return Date: ").append(returnDate == null ? "N/A" : returnDate).append("\n");
-        sb.append("Status: ").append(!returned ? "Not yet returned" : "Returned").append("\n");
-
-        return sb.toString();
+        return String.format("Loan(Patron=%s, %s, DueDate=%s, ReturnDate=%s, LoanDate=%s, Returned=%b)", patron.getName(), book, dueDate, returnDate, loanDate, returned);
     }
 }
