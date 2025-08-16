@@ -1,0 +1,6 @@
+public enum BorrowResult {
+    SUCCESS,
+    BOOK_NOT_FOUND,
+    PATRON_NOT_REGISTERED,
+    NO_COPIES_AVAILABLE
+}
