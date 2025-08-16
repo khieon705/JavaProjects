@@ -37,8 +37,8 @@ public class Loan {
         returned = true;
     }
 
-    public boolean isOverDue(LocalDate date) {
-        return date.isAfter(dueDate);
+    public ReturnResult isOverDue(LocalDate date) {
+        return date.isAfter(dueDate) ? ReturnResult.SUCCESS_LATE : ReturnResult.SUCCESS_ON_TIME;
     }
 
     public long daysDifference() {
