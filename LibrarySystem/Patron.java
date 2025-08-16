@@ -6,7 +6,7 @@ public class Patron {
     private final ArrayList<Loan> record;
 
     public Patron(String name) {
-        this.name = StringFormat.formatStoredString(name);
+        this.name = name;
         record = new ArrayList<>();
     }
 
