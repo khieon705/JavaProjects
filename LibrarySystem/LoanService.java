@@ -22,34 +22,13 @@ public class LoanService {
         loanRecord.add(loan);
     }
 
-    public void viewLoan(Loan loan) {
-        System.out.println("=== Loan Record ===");
-        System.out.println(loan);
-        System.out.println(returnMessage(loan));
-    }
-
     public void updateLoanStatus(LocalDate date, Loan loan) {
         loan.setReturnDate(date);
         loan.returned();
     }
 
-    private String returnMessage(Loan loan) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Book returned! ");
-        if (loan.isOverDue()) {
-            sb.append("Late by ").append(loan.daysDifference()).append(" ").append(loan.daysDifference() == 1 ? "day." : "days. ");
-        } else {
-            sb.append("On time. ");
-        }
-
-        sb.append("Fee: $").append(loanFee(loan));
-
-        return sb.toString();
-    }
-
     public long loanFee(Loan loan) {
-        if (loan.isOverDue()) {
+        if (loan.isOverDue(loan.getReturnDate())) {
             int loanFee = 10;
             return loan.daysDifference() * loanFee;
         }
