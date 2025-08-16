@@ -1,8 +1,8 @@
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 public class PatronRegistry {
-    private final HashMap<String, Patron> patronList;
+    private final Map<String, Patron> patronList;
 
     public PatronRegistry() {
         patronList = new HashMap<>();
