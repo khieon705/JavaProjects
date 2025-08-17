@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -41,9 +42,9 @@ public class UserInterface {
 
     private void addBook() {
         System.out.print("Enter book title: ");
-        String title = scanner.nextLine();
+        String title = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.print("Enter book author: ");
-        String author = scanner.nextLine();
+        String author = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.print("Enter number of copies: ");
         int numOfCopies = Integer.parseInt(scanner.nextLine());
 
@@ -52,43 +53,92 @@ public class UserInterface {
 
     private void addPatron() {
         System.out.print("Enter name: ");
-        String name = scanner.nextLine();
+        String name = InputSanitizer.formatStoredString(scanner.nextLine());
 
-        library.addPatron(new Patron(name));
+        if (library.addPatron(new Patron(name))) {
+            System.out.println("Patron successfully registered");
+        } else {
+            System.out.println("Patron is already registered");
+        }
     }
 
     private void borrowBook() {
         System.out.print("Enter book title: ");
-        String title = scanner.nextLine();
+        String title = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.print("Enter book author: ");
-        String author = scanner.nextLine();
+        String author = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.print("Enter patron name: ");
-        String name = scanner.nextLine();
+        String name = InputSanitizer.formatStoredString(scanner.nextLine());
+        System.out.println();
 
-        library.borrowBook(new Book(title, author), name);
+        BorrowResult result = library.borrowBook(new Book(title, author), name);
+        switch (result) {
+            case SUCCESS -> System.out.println("Book borrowed successfully");
+            case BOOK_NOT_FOUND ->  System.out.println("Book is not available in this library");
+            case PATRON_NOT_REGISTERED -> System.out.println("Patron is not registered. Please register first");
+            case NO_COPIES_AVAILABLE -> System.out.println("No copy available");
+        }
     }
 
     private void returnBook() {
         System.out.print("Enter patron name: ");
-        String name = scanner.nextLine();
+        String name = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.print("Enter book title: ");
-        String title = scanner.nextLine();
+        String title = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.print("Enter book author: ");
-        String author = scanner.nextLine();
+        String author = InputSanitizer.formatStoredString(scanner.nextLine());
         System.out.println();
-        library.returnBook(new Book(title, author), name);
+
+        Book book = new Book(title, author);
+        ReturnResult result = library.returnBook(book, name);
+        switch (result) {
+            case SUCCESS_ON_TIME -> System.out.println("Book returned! On Time. Fee: $0");
+            case SUCCESS_LATE -> {
+                Loan loan = library.getLoanHistoryForPatron(name).stream()
+                        .filter(l -> l.getBook().equals(book))
+                        .findFirst()
+                        .orElse(null);
+
+                if (loan == null) {
+                    System.out.println("Loan record was not found");
+                    break;
+                }
+
+                System.out.println("Book returned! Late by " + loan.daysDifference());
+                if (loan.daysDifference() > 1) {
+                    System.out.println(" days. Fee: $" + library.getLoanFee(loan));
+                } else {
+                    System.out.println(" day. Fee: $" + library.getLoanFee(loan));
+                }
+            }
+        }
     }
 
     private void viewLoanInformation() {
         System.out.print("View all? (Y/n) ");
-        String input = scanner.nextLine();
+        String input = InputSanitizer.formatStoredString(scanner.nextLine());
 
-        if (StringFormat.formatStoredString(input).equals("y")) {
-            library.viewLoanHistory();
-        } else if (StringFormat.formatStoredString(input).equals("n")) {
+        if (input.equals("y")) {
+            viewAllHistory(library.getAllLoanHistory());
+        } else if (input.equals("n")) {
             System.out.print("Enter patron name: ");
-            String name = scanner.nextLine();
-            library.viewLoanHistory(name);
+            String name = InputSanitizer.formatStoredString(scanner.nextLine());
+            viewLoanHistoryForPatron(name, library.getLoanHistoryForPatron(name));
         }
+    }
+
+    private void viewAllHistory(List<Loan> record) {
+        System.out.println("=== All Loan Records ===");
+        record.forEach(System.out::println);
+    }
+
+    private void viewLoanHistoryForPatron(String name, List<Loan> record) {
+        if (record == null) {
+            System.out.println("Patron is not registered and has no record");
+            return;
+        }
+
+        System.out.println(InputSanitizer.formatOutputString(name) + " Record:");
+        record.forEach(System.out::println);
     }
 }
