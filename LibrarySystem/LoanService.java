@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LoanService {
     private final ArrayList<Loan> loanRecord;
@@ -36,7 +38,7 @@ public class LoanService {
         return 0;
     }
 
-    public ArrayList<Loan> getLoanRecord() {
-        return loanRecord;
+    public List<Loan> getLoanRecord() {
+        return Collections.unmodifiableList(loanRecord);
     }
 }

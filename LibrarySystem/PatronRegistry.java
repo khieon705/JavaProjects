@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Collections;
 
 public class PatronRegistry {
     private final Map<String, Patron> patronList;
@@ -26,6 +27,6 @@ public class PatronRegistry {
     }
 
     public Map<String, Patron> getPatronList() {
-        return patronList;
+        return Collections.unmodifiableMap(patronList);
     }
 }
