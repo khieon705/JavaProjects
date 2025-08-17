@@ -28,7 +28,7 @@ public class LoanService {
     }
 
     public long loanFee(Loan loan) {
-        if (loan.isOverDue(loan.getReturnDate())) {
+        if (loan.isOverDue(loan.getReturnDate()) == ReturnResult.SUCCESS_LATE) {
             int loanFee = 10;
             return loan.daysDifference() * loanFee;
         }
