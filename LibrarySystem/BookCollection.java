@@ -17,7 +17,7 @@ public class BookCollection {
     }
 
     public boolean isAvailable(Book book) {
-        return bookCollection.get(book) > 0;
+        return bookCollection.getOrDefault(book, 0) > 0 ;
     }
 
     public void reduceCopy(Book book) {
