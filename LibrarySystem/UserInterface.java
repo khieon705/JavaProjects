@@ -49,6 +49,7 @@ public class UserInterface {
         int numOfCopies = Integer.parseInt(scanner.nextLine());
 
         library.addBook(new Book(title, author), numOfCopies);
+        System.out.println("Book added successfully");
     }
 
     private void addPatron() {
